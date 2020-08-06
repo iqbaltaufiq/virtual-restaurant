@@ -7,7 +7,12 @@ use App\Invoice;
 use App\Menu;
 
 class InvoiceController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware('auth:user');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,12 +24,12 @@ class InvoiceController extends Controller
 
         // untuk halaman checkout ketika dibuka secara langsung
         $invoice_items = Invoice::where([
-            ['user_id', 'BARUSU'],
+            ['user_phone', auth('user')->user()->phone],
             ['invoice_status', 0]
         ])->get();
 
 
-        // ambil kode menu_id
+        // get the menu_id
         $item_codename = [];
         $posters = [];
         $total_payment = 0;
@@ -71,8 +76,9 @@ class InvoiceController extends Controller
         $letters = ['A','B','C','D'];
         // $letters = ['A','B','C','D','E','F','G','H'];
         // generate 6-digits user_id
-        $user_id = 'BARUSU'; // dari cookies login
-        $invoice_db = Invoice::where('user_id', $user_id)
+        $user_phone = auth('user')->user()->phone; // dari cookies login
+        // dd($user_phone);
+        $invoice_db = Invoice::where('user_phone', $user_phone)
                             ->orderBy('invoices_id', 'desc')
                             ->first(); // query ke tabel invoice
         
@@ -117,7 +123,7 @@ class InvoiceController extends Controller
             $invoice_id = $invoice_db->invoices_id;
         } else {
             // generate invoice baru dengan kode AAA
-            $invoice_id = 'AAA' . $user_id;
+            $invoice_id = 'AAA' . $user_phone;
         }
 
 
@@ -162,7 +168,7 @@ class InvoiceController extends Controller
         // insert ke tabel invoice
         Invoice::create([
             'invoices_id' => $invoice_id,
-            'user_id' => $user_id,
+            'user_phone' => $user_phone,
             'item_id' => $item_id,
             'item_name' => $request->item_name,
             'quantity' => $request->quantity,
@@ -218,11 +224,69 @@ class InvoiceController extends Controller
     {
         // untuk menghapus item dari daftar checkout
         $item_id = substr($item, 0, 6);
-        $invoice_id = substr($item, 6, 9);
+        $invoice_id = substr($item, 6);
         Invoice::where('invoices_id', $invoice_id)
         ->where('item_id', $item_id)
         ->delete();
         return redirect('/checkout')->with('status', 'Item deleted successfully.');
+    }
+
+    public function payment ()
+    {
+        // cari semua orderan dari username BARUSU yang belum dibayar
+        $total_price = 0;
+        $invoice_number = '';
+        $user_phone = auth('user')->user()->phone; // please retrieve 'user_phone' from cookies
+        $uncompleted_order = Invoice::where('user_phone', $user_phone)
+                                    ->where('invoice_status', 0)
+                                    ->get();
+        if (count($uncompleted_order) > 1) {
+            for ($i = 0; $i < count($uncompleted_order); $i++) {
+                // sum all the prices
+                $total_price += $uncompleted_order[$i]->price;
+                // check whether if there are different invoices in the collection
+                if ($i > 0) {
+                    if($uncompleted_order[$i]->invoices_id != $uncompleted_order[$i - 1]->invoices_id){
+                        dump('Different invoice found.');
+                    } else if ($i == count($uncompleted_order) - 1) {
+                        $invoice_number = $uncompleted_order[$i]->invoices_id;
+                    }
+                }
+            }
+        } else if (count($uncompleted_order) == 1) {
+            $total_price = $uncompleted_order[0]->price;
+            $invoice_number = $uncompleted_order[0]->invoices_id;
+        }
+
+        return view('contents.payment', [
+            'user_phone' => $user_phone,
+            'invoice_number' => $invoice_number,
+            'total_price' => $total_price
+        ]);
+    }
+
+    public function finalize($invoice)
+    {
+        $user_phone = auth('user')->user()->phone; // please retrieve 'user_phone' from cookies
+        Invoice::where('invoices_id', $invoice)
+        ->where('user_phone', $user_phone)
+        ->where('invoice_status', 0)
+        ->update([
+            'invoice_status' => 1
+        ]);
+
+        return redirect('/')->with('status', 'Payment completed.');
+    }
+
+    public function cancel($invoice)
+    {
+        $user_phone = auth('user')->user()->phone; // please retrieve 'user_phone' from cookies
+        Invoice::where('invoices_id', $invoice)
+                ->where('user_phone', $user_phone)
+                ->where('invoice_status', 0)
+                ->delete();
+
+        return redirect('/')->with('status', 'Your order has been canceled.');
     }
 
 }

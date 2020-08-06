@@ -14,7 +14,7 @@
             <p class="card-text text-muted">Invoice Number</p>
             <h2 class="card-title font-weight-bold">{{ $invoice_number }}</h2>
             <p class="card-text text-muted">User</p>
-            <h5 class="card-title font-weight-bold">{{ $user_id }}</h5>
+            <h5 class="card-title font-weight-bold">{{ auth('user')->user()->name }}</h5>
             <p class="card-text text-muted">Total Payment</p>
             <h4 class="card-title font-weight-bold">Rp{{ number_format($total_price,0,',','.') }}</h4>
             <form action="/cancel/{{ $invoice_number }}" class="d-inline" method="post">

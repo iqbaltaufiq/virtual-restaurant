@@ -17,14 +17,14 @@
         <hr>
         <div class="menus">
           @foreach ($menus as $menu)
-          <div class="card-menu">
+          <a href="/detail/{{ Str::slug($menu['name'], '-') }}" class="card-menu text-decoration-none">
             <div class="menu-img">
               <img src="\img\food\{{ $menu['poster'] }}" alt="">
             </div>
             <h5 class="menu-name">{{ $menu['name'] }}</h5>
             <p class="menu-price">Rp{{ number_format($menu['price'], 0, ',', '.') }}</p>
-            <a href="/detail/{{ Str::slug($menu['name'], '-') }}" class="btn btn-outline-success btn-block">Detail</a>
-          </div>
+            {{-- <a href="/detail/{{ Str::slug($menu['name'], '-') }}" class="btn btn-outline-success btn-block">Detail</a> --}}
+          </a>
           @endforeach
         </div>
       </div>
@@ -55,8 +55,9 @@
   .card-menu {
     display: grid;
     grid-auto-flow: row;
-    grid-template-rows: 2fr repeat(3, 0.5fr);
+    grid-template-rows: 2fr repeat(2, 0.5fr);
     width: 200px;
+    border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   }
 
@@ -66,6 +67,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
 
   .menu-img img {
@@ -74,9 +77,11 @@
 
   .menu-name, .menu-price {
     padding: 0px 10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
 
   .menu-name {
+    color: #333;
     margin-top: 5px;
   }
 

@@ -66,7 +66,7 @@
           <div class="jumbotron jumbotron-fluid text-center text-white">
             <div class="container">
               <h1 class="display-4">Your foodcart is empty</h1>
-              <p class="lead">Let's add some items from our menu list <a href="/all" class="text-decoration-none">here.</a></p>
+              <p class="lead">Let's add some items from our menu list <a href="/all" class="text-warning text-decoration-none">here.</a></p>
             </div>
           </div>
         </div>
@@ -162,11 +162,11 @@
     background: #1a936f;
     border-radius: 10px;
   }
-  a.text-decoration-none, a.text-decoration-none:hover {
+  /* a.text-decoration-none, a.text-decoration-none:hover {
     color: yellow;
   }
   a.text-decoration-none:hover {
     opacity: 0.6;
-  }
+  } */
   
 </style>

@@ -19,10 +19,10 @@ Route::get('/category/{category}', 'PageController@filterMenuByCategory');
 Route::get('/detail/{food}', 'PageController@detail');
 Route::delete('/checkout/{item_id}', 'InvoiceController@destroy');
 Route::post('/cart', 'InvoiceController@store');
-Route::put('/finalize/{invoice}', 'PageController@finalize');
+Route::put('/finalize/{invoice}', 'InvoiceController@finalize');
 Route::get('/checkout', 'InvoiceController@index');
-Route::get('/payment', 'PageController@payment');
-Route::delete('/cancel/{invoice}', 'PageController@cancel');
+Route::get('/payment', 'InvoiceController@payment');
+Route::delete('/cancel/{invoice}', 'InvoiceController@cancel');
 
 // Admin/menu
 Route::get('/admin', 'MenuController@index');

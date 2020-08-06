@@ -31,7 +31,9 @@
             <a class="dropdown-item" href="/category/beverages">Beverages</a>
           </div>
         </li>
-        <a class="nav-item nav-link" href="/checkout">Foodcart</a>
+        @if (auth('user')->check() || auth('admin')->check())
+          <a class="nav-item nav-link" href="/checkout">Foodcart</a>
+        @endif
       </div>
     </div>
 
@@ -105,20 +107,7 @@
 
   <script type="text/javascript" src="\jquery\jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="\bootstrap4\js\bootstrap.js"></script>
-  <script type="text/javascript">
-    window.onload = function () {
-      const profileBtn = document.getElementById('profileBtn');
-      const profileMenu = document.getElementById('drop-profile');
-      // create a toggle menu below the user name
-      if (profileBtn) {
-        profileBtn.addEventListener('click', function(ev) {
-          let disp = profileMenu.style.display != 'block' ? 'block' : 'none';
-          profileMenu.style.display = disp;
-          ev.preventDefault();
-        });
-      }
-    }
-  </script>
+  <script type="text/javascript" src="\js\script.js"></script>
 
 </body>
 </html>
