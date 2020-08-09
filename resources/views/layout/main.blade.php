@@ -39,7 +39,27 @@
 
     @if (!auth('user')->check() && !auth('admin')->check())
     <div class="auth-button">
-      <a href="/login" class="btn btn-success">Sign in</a>
+      
+      
+      <div class="drop-container d-inline">
+        <a class="drop-hover text-decoration-none text-white btn btn-success" href="" id="profileBtn" role="button">
+          Sign in
+        </a>
+        <div class="drop-profile" id="drop-profile">
+          <form action="/login" method="post">
+            @csrf
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" name="email" id="email" placeholder="e.g. hello@viresto.com">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
+            </div>
+            <button type="submit" class="d-none">Login</button>
+          </form>
+        </div>
+      </div>
       <a href="/register" class="btn btn-outline-primary">Sign up</a>
     </div>
     @endif

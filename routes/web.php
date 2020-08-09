@@ -34,12 +34,8 @@ Route::get('/add', 'MenuController@create');
 Route::get('/admin/{id}/edit', 'MenuController@edit');
 
 // Auth routes
-Route::get('/login', 'LoginController@getLogin')->middleware('guest');
 Route::post('/login', 'LoginController@postLogin');
+Route::get('/login', 'LoginController@getLogin')->middleware('guest');
 Route::get('/logout', 'LoginController@logout');
-Route::get('/user', function() {
-    return view('user');
-})->middleware('auth:user');
-// Route::get('/mod', function() {
-//     return view('mod');
-// })->middleware('auth:admin');
+Route::post('/register', 'RegisterController@submit');
+Route::get('/register', 'RegisterController@form')->middleware('guest');

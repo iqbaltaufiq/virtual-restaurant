@@ -13,26 +13,26 @@ class LoginController extends Controller
 {
     public function getLogin ()
     {
-        return view('login');
+        return view('admin.user.login');
     }
-
 
     public function postLogin (Request $request)
     {
         // validate the login form
-        $this->validate($request, [
+        $validation = $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        // Login attempt
-        if (auth('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->intended('/admin');
-        } elseif (auth('user')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->intended('/');
+        if ($validation) {
+            // Login attempt
+            if (auth('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
+                return redirect()->intended('/admin');
+            } elseif (auth('user')->attempt(['email' => $request->email, 'password' => $request->password])) {
+                return redirect()->intended('/');
+            }
         }
     }
-
 
     public function logout()
     {
@@ -41,7 +41,6 @@ class LoginController extends Controller
         } elseif (Auth::guard('user')->check()) {
             auth('user')->logout();
         }
-
         return redirect('/');
     }
 }

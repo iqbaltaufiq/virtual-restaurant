@@ -12,7 +12,8 @@
   <fieldset style="width:300px; margin:100px auto">
     <legend>Form Login</legend>
     <form action="/login" method="post">
-      {{ csrf_field() }}
+      @method('post') 
+      @csrf
       <table>
         <tr>
           <td>Email</td>
