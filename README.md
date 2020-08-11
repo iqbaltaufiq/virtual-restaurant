@@ -1,85 +1,56 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Virtual Restaurant - Documentation
+---
+## Introduction
+- Virtual restaurant is a website where you can order meals, desserts & beverages and we will deliver it to your location.
+- It has the same concept as e-commerce (shopping site) where you can pick any product you like and they will send it to you.
+- The difference is, while most e-commerce companies act as an aggregator, instead we act as a product owner.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Project Preview
+If you want to see how this project visually looks, then you can open the `PREVIEW.md` file in the parent directory or [click here to redirect.](https://github.com/iqbaltaufiq/virtual-restaurant/blob/master/PREVIEW.md)
 
-## About Laravel
+## Tech used
+* HTML, CSS & Vanilla JS
+* [PHP 7.3.2](https://www.php.net)
+* [Laravel 7.x](https://laravel.com)
+* [Bootstrap 4.2.1](https://getbootstrap.com)
+* [MariaDB 10.1.38](https://mariadb.org)
+* [jQuery](https://jquery.com) (included for dependencies only)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## How to Install
+#### [ ZIP ]
+1. Download this repository as a `.zip` file.
+2. Create a new laravel project using composer in your local computer.
+3. Extract the previously downloaded zip file.
+4. Copy all items from inside the extracted file.
+5. Paste it into your newly created laravel project folder.
+6. Open `phpmyadmin` and create a new database (to make it easier to configure, named it to `virtual-restaurant`).
+7. Import the SQL database from `_SQL_FILE` folder to your newly created database (don't forget to read the `How_to_use.txt` guide).
+8. Do some common configuration, like `.env` files, and any other configurations that you may need to configure.
+9. Run `php artisan serve` from your working directory to see if that works smoothly.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## How Things Work
+#### [ As a user ]
+1. Open the website (e.g. `127.0.0.1:8000`).
+2. Create an account or sign-in with the existing account.
+3. Click the *Menu List* on the navbar and select any category you like.
+4. Click on any food you want.
+5. Select the item quantity, options (if available) and message note for your order. (You can add multiple foods by repeating the process from point 4)
+6. Open the *foodcart* menu to see your order.
+7. Click *payment* to continue.
+8. Click *Complete* to finish your current invoice, or *Cancel Order* to cancel your current invoice and removes all the items from your foodcart.
+* notes: users can't and shouldn't access the `/admin` route.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### [ As an admin ]
+1. Open the website (e.g. `127.0.0.1:8000`).
+2. Sign-in with existing admin account.
+3. Admin will be redirected to `/admin` route.
+4. Admin can add a new menu into database by clicking *add item* on the bottom right of the screen.
+5. Admin can `edit` and `delete` a menu from database by clicking on *view* button on the selected menu.
+* notes: admin can't and shouldn't make an invoice. If you want to order some foods, use `user`'s account instead.
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-
-### Community Sponsors
-
-<a href="https://op.gg"><img src="http://opgg-static.akamaized.net/icon/t.rectangle.png" width="150"></a>
-
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [云软科技](http://www.yunruan.ltd/)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### [ As a guest ]
+1. A guest means someone that isn't logged in as either a user or an admin.
+2. Guest can only open the menu categories and see the menu details (such as description, quantity, options and price) but they __CANNOT__ perform any ordering activities.
+3. Guest can't and shouldn't access `/admin` route.
+4. If a guest is trying to order a food, then they will be redirected to a login page.
+5. If a guest is trying to access `/admin` route, then they will also be redirected to a login page.
