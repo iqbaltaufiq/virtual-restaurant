@@ -12,6 +12,4 @@ npm-debug.log
 yarn-error.log
 
 /public/bootstrap3
-/public/bootstrap4
-/public/jquery
 /public/img-original
