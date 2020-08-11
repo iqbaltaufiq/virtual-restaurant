@@ -1,0 +1,19 @@
+[ How to import SQL file ]
+1. Create a new database on phpmyadmin.
+2. On the upper tab, click import.
+3. Click the 'Choose file' button, and select the virtual-restaurant.sql file from this folder.
+4. Click 'Go' and all the tables will be imported automatically.
+
+[ What is the password on each account? ]
+I'm using the bcrypt() method to hash the password, and the actual password is a concatenation between username and the word 'pass'.
+
+Example:
+If an account has a username 'reus', then the password will be 'reuspass' (without quotes)
+If an account has a username 'mb459', then the password will be 'mb459pass' (without quotes)
+If an account has a username 'admin01', then the password will be 'admin01pass' (without quotes)
+and so on...
+
+And yes, this is just for testing purposes only. You should never create password with same patterns like that.
+And you can create more account by either registering a new account via 'register' page or by using 'seeder' feature provided by Laravel.
+
+- EOL -
